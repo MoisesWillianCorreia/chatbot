@@ -4,6 +4,7 @@ var chatMessages = document.getElementById("chat-messages");
 var cnpj;
 var nome;
 var email;
+var balancete = false;
 
 function sendMessage() {
   var userInput = document.getElementById("user-input").value;
@@ -45,23 +46,34 @@ function handleKeyDown(event) {
 function chatbot(input) {
   var response = "";
 
-  if (input.toLowerCase().includes("balancete")) {
-    response = "Ótimo! Vou precisar de algumas informações para gerar o balancete.";
-    response += "<br>Por favor, digite o CNPJ da empresa.";
-  } else if (cnpj === undefined) {
-    cnpj = input;
-    response = "Ótimo! Agora, digite o nome da empresa.";
-  } else if (nome === undefined) {
-    nome = input;
-    response = "Perfeito! Agora, digite o email da empresa.";
-  } else if (email === undefined) {
-    email = input;
-    response = "Gerando balancete para o CNPJ: " + cnpj + "<br>da empresa " + nome + "<br>com o email " + email;
-  } else {
+  if(input.toLowerCase().includes("balancete"))
+  {
+    balancete = true
+  }
+
+  if(balancete)
+  {
+    if (input.toLowerCase().includes("balancete")) {
+      response = "Ótimo! Vou precisar de algumas informações para gerar o balancete.";
+      response += "<br>Por favor, digite o CNPJ da empresa.";
+    } else if (cnpj === undefined) {
+      cnpj = input;
+      response = "Ótimo! Agora, digite o nome da empresa.";
+    } else if (nome === undefined) {
+      nome = input;
+      response = "Perfeito! Agora, digite o email da empresa.";
+    } else if (email === undefined) {
+      email = input;
+      response = "Gerando balancete para o CNPJ: " + cnpj + "<br>da empresa " + nome + "<br>com o email " + email;
+      enviarDadosParaAPI(cnpj, nome, email);
+  
+    } else {
+      response = "Desculpe, não entendi. Pode repetir?";
+    }
+  }else {
     response = "Desculpe, não entendi. Pode repetir?";
   }
   // Enviar os dados para a API
-  enviarDadosParaAPI(cnpj, nome, email);
   return response;
 }
 function enviarDadosParaAPI(cnpj, nome, email) {
