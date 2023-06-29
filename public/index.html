@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chatbot Personalizado</title>
+  <style>
+    .chat-container {
+      width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .message {
+      margin-bottom: 10px;
+    }
+
+    .user-message {
+      text-align: right;
+      font-weight: bold;
+    }
+
+    .bot-message {
+      text-align: left;
+    }
+
+    .input-container {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="message">
+      <div class="bot-message">Olá! Sou um chatbot personalizado.</div>
+      <div>Como posso ajudar?</div>
+    </div>
+    <div id="chat-messages"></div>
+    <div class="input-container">
+      <input type="text" id="user-input" onkeydown="handleKeyDown(event)">
+      <button onclick="sendMessage()">Enviar</button>
+    </div>
+  </div>
+
+  <script src="chatbot.js"></script>
+</body>
+</html>
